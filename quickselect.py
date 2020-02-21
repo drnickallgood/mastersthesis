@@ -6,46 +6,57 @@ get list of hashes that occur more than k times
 
 """
 """
-Original Source: https://github.com/aanmtn/QuickSelect/blob/master/main.py
+Original Source: https://leetcode.com/problems/kth-largest-element-in-an-array/discuss/190483/quickselect-algorithm-in-java-and-python
 """
+import random
 
 class QuickSelect:
 
-    def __init__(self,arr):
-        self.arr = arr
-
-    def partition(self,l, r):
-        x = self.arr[r]
-        i = l - 1
-        for j in range(l, r):
-            if self.arr[j] <= x:
-                i = i + 1
-                self.arr[i], self.arr[j] = self.arr[j], self.arr[i]
-                self.arr[i + 1], self.arr[r] = self.arr[r], self.arr[i + 1]
-            
-        return i + 1
-
-    def kthlargest(self,arr,k):
-        l = 0
-        r = len(arr) - 1
-        split_point = self.partition(l, r) #choosing a pivot and saving its index
-        if split_point == r - k + 1: #if the choosen pivot is the correct elemnt, then return it
-            result = arr[split_point]
-        elif split_point > r - k + 1: #if the element we are looking for is in the left part to the pivot then call 'kthlargest' on that part after modifing k
-            result = self.kthlargest(arr[:split_point],k - (r - split_point + 1))
-        else: #if the element we are looking for is in the left part to the pivot then call 'kthlargest' on that part
-            result = self.kthlargest(arr[split_point + 1:r+1],k)
-        return result
-
-    def get_klargest(self,k):
-        return self.kthlargest(self.arr,k)
+    # Finds k largest from list based on k
+    # 1 = Largest
+    # len(nums) = smallest
+    def findKthLargest(self, nums, k):
+        """
+        :type nums: List[int]
+        :type k: int
+        :rtype: int
+        """
+        return self.quickSelect(nums,0,len(nums)-1,k-1)
         
-#just for testing
-#a = [1, 3, 2, 5, 7, 6, 8, 9, 4]
+    def quickSelect(self,nums,start,end,k):
+        if start == end:
+            return nums[start]
+        
+        pivot_point = self.give_pivot(start,end)
+        pivot_index = self.partitian(nums,start,end,pivot_point)
+        
+        if pivot_index == k:
+            return nums[k]
+        elif k < pivot_index:
+            return self.quickSelect(nums,start,pivot_index-1,k)
+        else: 
+            return self.quickSelect(nums,pivot_index+1,end,k)
+    
+    def partitian(self,nums,start,end,pivot):
+        pivot_val = nums[pivot]
+        nums[pivot],nums[end] = nums[end],nums[pivot]
+        i = start - 1
+        for j in range(start,end):
+            if nums[j] > pivot_val:
+                i += 1
+                nums[j], nums[i] = nums[i], nums[j]
+            
+        nums[i+1],nums[end] = nums[end],nums[i+1]
+        return i+1
+    
+    def give_pivot(self,start,end):
+        return random.randint(start,end)
 
-#qs = QuickSelect(a)
 
-#print(qs.get_klargest(4))
-#print(kthlargest(a, 4))
+qs = QuickSelect()
+a = [1,2,3,4,5,9,7,2,19]
+
+print(qs.findKthLargest(a,1))
+
 
 
