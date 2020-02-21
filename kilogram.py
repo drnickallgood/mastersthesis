@@ -27,6 +27,7 @@ return top-k entries from S
 import math
 import os
 import hashlib
+import QuickSelect
 
 class KiloGram:
 	"""
