@@ -51,10 +51,8 @@ class KiloGram:
 	def total_ngrams(self):
 		return len(ngrams)
 
-        
-
-	def rollingHash(self):
-		for doc in self.docs:
+        def rollingHash(self):
+                for doc in self.docs:
 			for gram in ngrams:
 				hash = hashlib.sha1(gram.encode())
                                 mod_hash = hash % self.bucket_size()

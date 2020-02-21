@@ -1,11 +1,19 @@
 """
 Original Source: https://github.com/aanmtn/QuickSelect/blob/master/main.py
+
+Need to modify, needs to find desired number of frequent hash-grams
+i.e hashes that occur k times or greater..
+
+get list of hashes that occur more than k times
+
 """
+import numpy as np
 
 class QuickSelect:
 
-    def __init__(self,arr):
+    def __init__(self,arr,freq):
         self.arr = arr
+        self.freq = freq
 
     def partition(self,l, r):
         x = self.arr[r]
@@ -32,12 +40,19 @@ class QuickSelect:
 
     def get_klargest(self,k):
         return self.kthlargest(self.arr,k)
+
+    def topkhashes(self):
+        first = self.kthlargest(self.arr,1)
+        second = self.kthlargest(self.arr,2)
+        third = self.kthlargest(self.arr,3)
+        fourth = self.kthlargest(self.arr,4)
+        
         
 #just for testing
-#a = [1, 3, 2, 5, 7, 6, 8, 9, 4]
+a = [1, 3, 2, 5, 7, 6, 8, 9, 4]
 
-#qs = QuickSelect(a)
+qs = QuickSelect(a,5)
 
-#print(qs.get_klargest(4))
+print(qs.get_klargest(2))
 #print(kthlargest(a, 4))
 
