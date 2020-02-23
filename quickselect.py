@@ -12,6 +12,53 @@ import random
 
 class QuickSelect:
 
+    def kFindMost(self,hashes,k):
+        """
+
+        """
+        # fix indexing
+        #k = k+1
+
+        # Copy hashes to new structure
+        newHashes = hashes
+        
+        # Finding the most common hash in hashs
+        if k <= 0:
+            print("Error! Invalid k")
+            exit(1)
+        if k == 1:
+            return self.findMost(newHashes)
+        for i in range(k):
+            if len(newHashes) == 0:
+                break
+            # get largest hash
+            most = self.findMost(newHashes)
+            # if current most occuring hash is less than our index
+            # Remove from list to get the next one
+            if i < k:
+                newHashes[:] = (h for h in newHashes if h != most)
+                    
+        return most
+
+    def findMost(self,hashes):
+        """
+        : type nums: string
+        : type k: int - occurs the most, 2nd most
+        : return type: string
+        """
+        counter = 0
+        curr_hash = hashes[0]
+
+        for i in hashes:
+            curr_freq = hashes.count(i)
+            if curr_freq > counter:
+                counter = curr_freq
+                curr_hash = i
+                
+        return curr_hash
+        
+        
+        
     # Finds k largest from list based on k
     # 1 = Largest
     # len(nums) = smallest
@@ -53,10 +100,19 @@ class QuickSelect:
         return random.randint(start,end)
 
 
-qs = QuickSelect()
-a = [1,2,3,4,5,9,7,2,19]
+#hashes = ["14kj", "14kj", "1a30$d", "2a9bl34ac", "14kj", "1a30$d", "nick"]
+#qs = QuickSelect()
+#a = [1,2,3,4,5,9,7,2,19]
 
-print(qs.findKthLargest(a,1))
+
+#print(qs.kFindMost(hashes,1))
+#print(hashes)
+#print(qs.kFindMost(hashes,2))
+#print(hashes)
+
+#print(qs.kFindMost(hashes,3))
+#print(qs.kFindMost(hashes,4))
+
 
 
 
