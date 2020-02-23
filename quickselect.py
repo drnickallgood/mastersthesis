@@ -12,6 +12,9 @@ import random
 
 class QuickSelect:
 
+    def __init__(self):
+        pass
+
     def kFindMost(self,hashes,k):
         """
 
