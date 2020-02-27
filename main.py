@@ -15,6 +15,11 @@ lipsum = ["Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusm
 
 ngrams_2 = ["no", "on", "or", "mo", "ut", "la", "do", "ed", "ei"]
 
+'''
+First phase - KiloGram finds the top k hashes for some corpora. Once the top k hashes are found we can then encode the bucket numbers of the top hashes into a matrix for a quantum computer to use.
+
+Second phase  - This is where we would replace part of the KiloGram algorithm with Grovers Algorithm to do a linear search on this unsorted data (Grovers does not do as well on sorted data). 
+'''
 
 
 kg = KiloGram(lipsum, ngrams_2)
