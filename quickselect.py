@@ -16,31 +16,33 @@ class QuickSelect:
         pass
 
     def kFindMost(self,hashes,k):
-        """
-
-        """
-        # fix indexing
-        #k = k+1
-
         # Copy hashes to new structure
         newHashes = hashes
-        
+
         # Finding the most common hash in hashs
+        '''
         if k <= 0:
             print("Error! Invalid k")
             exit(1)
+
+        # If just 1, find the largest and return it
         if k == 1:
             return self.findMost(newHashes)
+        '''
+
+        most = ""
         for i in range(k):
+            
             if len(newHashes) == 0:
                 break
             # get largest hash
             most = self.findMost(newHashes)
+
             # if current most occuring hash is less than our index
             # Remove from list to get the next one
             if i < k:
                 newHashes[:] = (h for h in newHashes if h != most)
-                    
+                        
         return most
 
     def findMost(self,hashes):
