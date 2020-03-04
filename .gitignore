@@ -4,5 +4,6 @@
 *-venv
 *.pyc
 .*pycache.*
+*venv*
 
 
