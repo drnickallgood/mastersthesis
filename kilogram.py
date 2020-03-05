@@ -74,7 +74,7 @@ class KiloGram:
             #print(hashes)
             
             # Top 5 hashes
-            for i in range(5):
+            for i in range(15):
                 if i == 0:
                     continue
                 else:
