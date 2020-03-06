@@ -19,9 +19,6 @@ for documents in C
 
 return top-k entries from S
 
-## Hashes supported
-{'sha384', 'md5', 'sha1', 'blake2s', 'shake_256', 'sha512', 'sha224', 'blake2b', 'sha3_224', 'sha3_256', 'sha3_384', 'sha3_512', 'shake_128', 'sha256'}
-
 """
 
 import math
@@ -34,7 +31,15 @@ class KiloGram:
         """
         Base class for KiloGram from the paper. 
         """
-        _bucket_size = (2**31) - 19
+        # Largest 32-bit prime
+        #_bucket_size = (2**31) - 19
+
+        # largest 16-bit prime
+        #_bucket_size = (2**15) - 19
+
+        # largest 8-bit prime
+        _bucket_size = (2**7) - 1
+
         # Dictionary / hash table for hash / n-gram
         _topk_hashes = list()
         topk_hash_table = dict()
