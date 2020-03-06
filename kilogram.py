@@ -39,6 +39,7 @@ class KiloGram:
 
         # largest 8-bit prime
         _bucket_size = (2**7) - 1
+        #_bucket_size = (2**8) - 15
 
         # Dictionary / hash table for hash / n-gram
         _topk_hashes = list()
