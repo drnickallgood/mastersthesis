@@ -50,11 +50,14 @@ int main()
     const bitLenInt carryIndex = indexLength + valueLength;
 
     // We theoretically know that we're looking for a value part of 100.
-    const int TARGET_VALUE = 0xFFFF;
+    //const int TARGET_VALUE = 0xFFFF;
+    const int TARGET_VALUE = 0xF3d7;
 
     // We theoretically don't know what the key is, but for the example only, we define it to prepare and check the
     // result state.
-    const int TARGET_KEY = 230;
+    //const int TARGET_KEY = 230;
+    //const int TARGET_KEY = 199;
+    const int TARGET_KEY = 0x019;
 
     // Both CPU and GPU types share the QInterface API.
 #if ENABLE_OPENCL
@@ -75,7 +78,7 @@ int main()
     toLoad[TARGET_KEY * 2U] = TARGET_VALUE & 0xFF;
     toLoad[TARGET_KEY * 2U + 1] = (TARGET_VALUE >> 8U) & 0xFF;
 
-    std::chrono::high_resolution_clock::time_point start = std::chrono::high_resolution_clock::now();
+    //std::chrono::high_resolution_clock::time_point start = std::chrono::high_resolution_clock::now();
     // Our input to the subroutine "oracle" is 8 bits.
     qReg->SetPermutation(0);
     qReg->H(valueLength, indexLength);
@@ -102,14 +105,15 @@ int main()
                   << "> chance of match:" << qReg->ProbAll(TARGET_VALUE | (TARGET_KEY << valueLength)) << std::endl;
     }
 
-    qReg->MReg(0, 16);
-    std::chrono::high_resolution_clock::time_point end = std::chrono::high_resolution_clock::now();
-    std::chrono::duration<double,std::milli> timeRequired = (end - start);
+    //qReg->MReg(0, 27);
+    //std::chrono::high_resolution_clock::time_point end = std::chrono::high_resolution_clock::now();
+    //std::chrono::duration<double,std::milli> timeRequired = (end - start);
 
-    std::cout << "Time taken by function: " << timeRequired.count() << "ms" << std::endl;
+    //std::cout << "Time taken by function: " << timeRequired.count() << "ms" << std::endl;
     std::cout << "After measurement (of value, key, or both):" << std::endl;
     std::cout << "Chance of match:" << qReg->ProbAll(TARGET_VALUE | (TARGET_KEY << valueLength)) << std::endl;
-    std::cout << "Current match: " << std::hex << qReg->MReg(0,16) << std::dec << std::endl;
+    std::cout << "Ngram: " << std::hex << qReg->MReg(0,16) << std::dec << std::endl;
+    std::cout << "Hash: " << std::hex << qReg->MReg(17,27) << std::dec << std::endl;
     std::cout <<  "Total Iterations: " << optIter << std::endl;
 
     free(toLoad);
